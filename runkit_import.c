@@ -231,7 +231,7 @@ static int php_runkit_import_class_consts(zend_class_entry *dce, zend_class_entr
 				}
 			}
 			if (
-				Z_TYPE_PP(c) == IS_CONSTANT_ARRAY
+				Z_TYPE_PP(c) == IS_CONSTANT_AST
 #if RUNKIT_ABOVE53
 				|| (Z_TYPE_PP(c) & IS_CONSTANT_TYPE_MASK) == IS_CONSTANT
 #endif
@@ -280,7 +280,7 @@ static int php_runkit_import_class_static_props(zend_class_entry *dce, zend_clas
 #else
 			zend_hash_quick_find(CE_STATIC_MEMBERS(ce), property_info_ptr->name, property_info_ptr->name_length + 1, property_info_ptr->h, (void*) &pp);
 			if (
-				Z_TYPE_PP(pp) == IS_CONSTANT_ARRAY
+				Z_TYPE_PP(pp) == IS_CONSTANT_AST
 #if RUNKIT_ABOVE53
 				|| (Z_TYPE_PP(pp) & IS_CONSTANT_TYPE_MASK) == IS_CONSTANT
 #endif // RUNKIT_ABOVE53
@@ -364,7 +364,7 @@ static int php_runkit_import_class_props(zend_class_entry *dce, zend_class_entry
 			}
 #endif // (PHP_MAJOR_VERSION == 5 && PHP_MINOR_VERSION >= 4) || (PHP_MAJOR_VERSION > 5)
 			if (
-				Z_TYPE_PP(p) == IS_CONSTANT_ARRAY
+				Z_TYPE_PP(p) == IS_CONSTANT_AST
 #if RUNKIT_ABOVE53
 				|| (Z_TYPE_PP(p) & IS_CONSTANT_TYPE_MASK) == IS_CONSTANT
 #endif // RUNKIT_ABOVE53

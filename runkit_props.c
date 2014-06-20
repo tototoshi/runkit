@@ -544,7 +544,7 @@ static int php_runkit_def_prop_add(char *classname, int classname_len, char *pro
 		return FAILURE;
 	}
 	if (
-	    Z_TYPE_P(copyval) == IS_CONSTANT_ARRAY
+	    Z_TYPE_P(copyval) == IS_CONSTANT_AST
 #	if RUNKIT_ABOVE53
 	    || (Z_TYPE_P(copyval) & IS_CONSTANT_TYPE_MASK) == IS_CONSTANT
 #	endif
