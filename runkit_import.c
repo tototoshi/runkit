@@ -236,7 +236,7 @@ static int php_runkit_import_class_consts(zend_class_entry *dce, zend_class_entr
 				|| (Z_TYPE_PP(c) & IS_CONSTANT_TYPE_MASK) == IS_CONSTANT
 #endif
 			) {
-				zval_update_constant_ex(c, (void*) 1, dce TSRMLS_CC);
+				zval_update_constant_ex(c, 1, dce TSRMLS_CC);
 			}
 			Z_ADDREF_P(*c);
 			if (zend_hash_add_or_update(&dce->constants_table, key, key_len, (void*)c, sizeof(zval*), NULL, action) == FAILURE) {
@@ -294,7 +294,7 @@ static int php_runkit_import_class_static_props(zend_class_entry *dce, zend_clas
 						php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unable to import %s::$%s (cannot remove old member)", dce->name, key);
 						goto import_st_prop_skip;
 					}
-					zval_update_constant(pp, dce TSRMLS_CC);
+					zval_update_constant(pp, 1 TSRMLS_CC);
 					if (php_runkit_def_prop_add_int(dce, key, key_len - 1, *pp, property_info_ptr->flags,
 					                                property_info_ptr->doc_comment,
 					                                property_info_ptr->doc_comment_len, dce,
@@ -369,7 +369,7 @@ static int php_runkit_import_class_props(zend_class_entry *dce, zend_class_entry
 				|| (Z_TYPE_PP(p) & IS_CONSTANT_TYPE_MASK) == IS_CONSTANT
 #endif // RUNKIT_ABOVE53
 			) {
-				zval_update_constant_ex(p, (void*) 1, dce TSRMLS_CC);
+				zval_update_constant_ex(p, 1, dce TSRMLS_CC);
 			}
 
 			php_runkit_def_prop_add_int(dce, key, key_len - 1, *p,

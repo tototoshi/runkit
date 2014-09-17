@@ -549,7 +549,7 @@ static int php_runkit_def_prop_add(char *classname, int classname_len, char *pro
 	    || (Z_TYPE_P(copyval) & IS_CONSTANT_TYPE_MASK) == IS_CONSTANT
 #	endif
 	) {
-		zval_update_constant_ex(&copyval, (void*) 1, ce TSRMLS_CC);
+		zval_update_constant_ex(&copyval, 1, ce TSRMLS_CC);
 	}
 #else
 	if (zend_hash_exists(&ce->default_properties, key, key_len + 1)) {
@@ -565,28 +565,6 @@ static int php_runkit_def_prop_add(char *classname, int classname_len, char *pro
 	}
 
 	return SUCCESS;
-}
-/* }}} */
-
-/* {{{ php_runkit_dump_string */
-static inline void php_runkit_dump_string(const char *str, int len) {
-	int j;
-	for (j=0; j<len; j++) {
-		printf("%c", str[j]);
-	}
-}
-/* }}} */
-
-/* {{{ php_runkit_dump_hashtable_keys */
-static inline void php_runkit_dump_hashtable_keys(HashTable* ht) {
-	HashPosition pos;
-	void *ptr;
-	for(zend_hash_internal_pointer_end_ex(ht, &pos);
-	    zend_hash_get_current_data_ex(ht, (void*)&ptr, &pos) == SUCCESS;
-	    zend_hash_move_backwards_ex(ht, &pos)) {
-		printf("key = ");
-		php_runkit_dump_string(pos->arKey, pos->nKeyLength);
-	}
 }
 /* }}} */
 
